@@ -1,0 +1,23 @@
+﻿@model IEnumerable<NeoSteam.Model.PlayInfo>
+@using Global;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>角色列表</title>
+</head>
+<body>
+    <div>
+        <table  border="1">
+        <tr><th>昵称</th><th>昵称</th></tr>
+        @foreach (var item in Model)
+        { 
+            <tr><td>@Html.DisplayFor(m => item.NickName)</td><td>@Html.DisplayFor(m => item.NickName)</td></tr>
+        }
+        </table>
+        
+    </div>
+</body>
+</html>

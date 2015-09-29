@@ -1,0 +1,53 @@
+﻿@{
+    int pageindex = (int)PageData["pageindex"];//当前页
+
+    int pagecount = (int)PageData["pagecount"];//总页数
+    int s_page = 0;
+    int e_page = 0;
+    if (pageindex < 5)
+    {
+        s_page = 1;
+        e_page = 10;
+    }
+    else
+    {
+        s_page = pageindex - 3;
+        e_page = pageindex + 4;
+    }
+    if (e_page > pagecount)
+    {
+        e_page = pagecount;
+    }
+}
+
+<nav>
+    <ul class="pagination">
+        @if (pageindex == 1)
+        {
+            <li class="disabled"><a href="#">&laquo;</a></li>
+        }
+        else
+        {
+            <li><a href="@(pageindex-1)">&laquo;</a></li>
+        }
+        @for (int i = s_page; i <= e_page; i++)
+        {
+            if (i == pageindex)
+            {
+            <li class="active"><a href="#">@i</a> </li>
+            }
+            else
+            {
+            <li><a href="/officer/index/@i">@i</a> </li>
+            }
+        }
+        @if (pageindex == pagecount)
+        {
+            <li class="disabled"><a href="#">&raquo;</a></li>
+        }
+        else
+        {
+            <li><a href="/officer/index/@(pageindex + 1)">&raquo;</a></li>
+        }
+    </ul>
+</nav>

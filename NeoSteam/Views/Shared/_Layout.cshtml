@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Content/css/docs.min.css">
+    <link rel="stylesheet" href="/Content/css/index.css" />
+    <link rel="stylesheet" href="/Content/css/footer.css" />
+    <!-- 可选的Bootstrap主题文件（一般不用引入） 
+    <link rel="stylesheet" href="/Content/css/bootstrap-theme.min.css">-->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/Scripts/jquery.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="/Content/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var sUrl = location.href.split('/');
+            if (sUrl[3] == "home") {
+                $('.navbar-nav').children().eq(0).addClass('active');
+            }
+            else if (sUrl[3] == "officer") {
+                $('.navbar-nav').children().eq(1).addClass('active');
+            }
+            else if (sUrl[3] == "userofficerlist") {
+                $('.navbar-nav').children().eq(2).addClass('active');
+            }
+            else if (sUrl[3] == "campaign") {
+                $('.navbar-nav').children().eq(3).addClass('active');
+            }
+            else {
+                $('.navbar-nav').children().eq(0).addClass('active');
+            }
+        });
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Neosteam</a>
+            </div>
+            <div id="bs-example-navbar-collapse-8" class="collapse navbar-collapse">
+                @if (NeoSteam.BLL.UserInfoBLL.CheckLogin.GetSessionInfo() == null)
+                {
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home/index">首页</a></li>
+                        <li><a>武将</a></li>
+                        <li><a>阵容</a></li>
+                        <li><a>战斗</a></li>
+                        <li><a>地图</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login/index">登录</a></li>
+                        <li><a href="/login/register">注册</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav">
+                        <li><a href="/home/index">首页</a></li>
+                        <li><a href="/officer/index">武将</a></li>
+                        <li><a href="/userofficerlist/index">阵容</a></li>
+                        <li><a href="/campaign/index">战斗</a></li>
+                        <li><a href="#">地图</a></li>
+                        <li></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login/index">个人中心</a></li>
+                        <li class="active"><a href="/login/loginout">退出</a></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </nav>
+@*    @if (NeoSteam.BLL.UserInfoBLL.CheckLogin.GetSessionInfo() != null)
+    {
+        <div class="container">
+            <div class="col-md-9">
+                <div class="bs-callout bs-callout-info">
+                   <code>等级：Lv.13</code> <code>战斗力:5345435</code> <code> 金钱：4644</code> <code>功勋：9875</code>
+                </div>
+            </div>
+        </div>
+    }*@
+    @RenderBody()
+    <footer class="neo-footer">
+        <p>&copy; Company 2015</p>
+    </footer>
+</body>
+</html>

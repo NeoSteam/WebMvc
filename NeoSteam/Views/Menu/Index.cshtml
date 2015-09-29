@@ -1,0 +1,39 @@
+﻿@{
+    Layout = null;
+}
+<ul>
+    <li class="active"><a href="#" class="mws-i-24 i-home">首页</a></li>
+    <li><a href="#" class="mws-i-24 i-chart">角色列表</a>
+        <ul>
+            <li><a href="/Supplier/StockNew">进货单</a></li>
+            <li><a href="/Supplier/Stock">进货记录</a></li>
+             <li><a href="/Supplier/Index">供应商管理</a></li>
+        </ul>
+    </li>
+    <li><a href="#" class="mws-i-24 i-day-calendar">销货管理</a>
+        <ul>
+            <li><a href="/Supplier/StockNew">进货单</a></li>
+            <li><a href="/Supplier/Stock">进货记录</a></li>
+             <li><a href="/Supplier/Index">供应商管理</a></li>
+        </ul>
+    </li>
+    <li><a href="#" class="mws-i-24 i-file-cabinet">产品管理</a></li>
+    <li><a href="#" class="mws-i-24 i-table-1">库存管理</a></li>
+    <li>
+        <a href="#" class="mws-i-24 i-list">报表管理</a>
+        <ul>
+            <li><a href="#">Layouts</a></li>
+            <li><a href="#">Elements</a></li>
+        </ul>
+    </li>
+    <li><a href="#" class="mws-i-24 i-cog">财务管理</a></li>
+</ul>
+<script type="text/javascript">
+    $(function () {
+        $.getJSON("/Menu/Menu", function (data) {
+            $.each(data, function (key, value) {
+                //alert(value.project);
+            });
+        });
+    });
+</script>

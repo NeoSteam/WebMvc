@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "注册";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using BotDetect.Web.UI.Mvc;
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl"
+    rel="stylesheet" type="text/css" />
+<script>
+$(function () {
+        $('#btn_sign').click(function () {
+            var username = $("#input_username").val();
+            var password = $("#input_password").val();
+            var again_password = $("#input_againpassword").val();
+            if (username == "" || password == "") {
+                $('.massage_box').html('请输入正确的帐号密码');
+                return false;
+            }
+            else if(password != again_password)
+            {
+                $('.massage_box').html('您输入的两次密码不一致');
+                return false;
+            }
+            $.ajax({
+                url: '/login/Add_Userinfo',
+                dataType: "json",
+                cache: false,
+                data: {
+                    uname: username,
+                    password: password,
+                },
+                type: "POST",
+                success: function (data) {
+                    if (data.status == 2)
+                        $('.massage_box').html("您输入的用户名已存在");
+                    else if (data.status == 0)
+                        $('.massage_box').html("恭喜您注册成功");
+                    else if (data.status == 1)
+                        $('.massage_box').html("注册失败，服务器异常");
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert(XMLHttpRequest.responseText);
+                }
+            });
+            return false;
+        });
+});
+    </script>
+<div class="container bs-docs-container">
+
+    <div class="header">
+        <h1 class="blog-title">注册</h1>
+        <p class="lead blog-description">The official example template of creating a blog with Bootstrap.The official example template of creating a blog with Bootstrap.The official example template of creating a blog with Bootstrap.The official example template of creating a blog with Bootstrap.</p>
+    </div>
+
+    <div class="col-md-9">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">帐号：</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="input_username" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">密码：</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="input_password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">密码：</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" id="input_againpassword" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="massage_box">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="btn_sign" class="btn btn-default">注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@{ MvcCaptcha sampleCaptcha = new MvcCaptcha("SampleCaptcha"); }
+@Html.Captcha(sampleCaptcha)
+@Html.TextBox("CaptchaCode")

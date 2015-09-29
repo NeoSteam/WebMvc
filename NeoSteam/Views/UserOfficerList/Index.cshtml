@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "我的阵容";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NeoSteam.Model.UserOfficer
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+            <h2 id="tables-hover-rows" class="page-header">我的阵容</h2>
+            <p class="lead">战斗力：<a href="#">@Model.combat_power</a></p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>武将</th>
+                        <th>等级</th>
+                        <th>星级</th>
+                        <th>属性</th>
+                        <th>职业</th>
+                        <th>攻</th>
+                        <th>血</th>
+                        <th>速</th>
+                        <th>闪</th>
+                        <th>暴</th>
+                        <th>技</th>
+                        <th>介绍</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   @foreach (var item in Model.UserOfficerList)
+                    { 
+                        <tr>
+                            <td>@Html.DisplayFor(m => item.Offid)</td>
+                            <td>@Html.DisplayFor(m => item.Offname)</td>
+                            <td>@Html.DisplayFor(m => item.Off_Level)</td>
+                            <td>
+                                @for (int i = 0; i < int.Parse(item.Star); i++)
+                                {<span class="glyphicon glyphicon-star"></span> }
+                            </td>
+                            <td>@Html.DisplayFor(m => item.Attribute)</td>
+                            <td>@Html.DisplayFor(m => item.Profession)</td>
+                            <td>@Html.DisplayFor(m => item.Attack)</td>
+                            <td>@Html.DisplayFor(m => item.Blood)</td>
+                            <td>@Html.DisplayFor(m => item.Speed)</td>
+                            <td>@Html.DisplayFor(m => item.Miss)</td>
+                            <td>@Html.DisplayFor(m => item.Crit)</td>
+                            <td>@Html.DisplayFor(m => item.Skill)</td>
+                            <td>@Html.DisplayFor(m => item.Introduction)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
