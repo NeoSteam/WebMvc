@@ -43,7 +43,7 @@ namespace CreatePlayInfo
             //} 
             string i = "60";
             string j = "100";
-
+            string k = 0;
             Console.Write(float.Parse(i) / float.Parse(j) *100);
             Console.Read();
         }
